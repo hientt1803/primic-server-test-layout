@@ -10,7 +10,7 @@ import axios from "axios";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(
   cors({
@@ -56,6 +56,7 @@ app.post("/webhook", async (req, res) => {
     const response = await axios.get(
       `${req.body.apiUrl}/v2/documents/search?ref=${req.body.masterRef}&q=[[at(document.type,"homepage")]]`
     );
+    console.log(response)
     if (response) {
       io.emit(
         "webhook-data",
